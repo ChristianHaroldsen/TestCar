@@ -11,7 +11,15 @@ int led_pin = 2;
 const int powerMax = 255;
 int powerRight = 0;
 int powerLeft = 0;
-char *state = "Starting State"; //Just allocated enough memory for a long string
+int state = 0;
+//States are integers to make things easier and they correspond to the keypad/diagram
+//2 NoPower
+//5 HalfPower
+//4 HalfTurnL
+//6 HalfTurnR
+//7 FullTurnL
+//9 FullTurnR
+//8 FullPower
 
 RF24 radio(9, 10); // CE, CSN
 
@@ -72,9 +80,8 @@ void loop()
           break;
         }
 
-        //push values to motor speed
-        analogWrite(motorLeft, powerLeft);
-        analogWrite(motorRight, powerRight);
+        //Takes state and applys motor values
+        PerformState(state);
       }
     delay(5);
 
@@ -82,12 +89,50 @@ void loop()
     digitalWrite(led_pin, HIGH);
   }
 
-  void Down (char *, state);
+  void PerformState (int state)
+  {
+    
+  }
+
+  void Down (int state)
+  {
+    switch (state)
+      case 8:
+      state = 5;
+      break;
+
+      case 9:
+      state = 6;
+      break;
+
+      case 7:
+      state = 4;
+      break;
+
+      case 5:
+      state = 2;
+      break;
+
+      case 6:
+      state = 2;
+      break;
+
+      case 4:
+      state = 2;
+      break;
+  }
+
+  void Up (int state)
   {
 
   }
 
-  void Up (char *, state);
+  void Left (int state)
   {
-    
+
+  }
+
+  void Right (int state)
+  {
+
   }
