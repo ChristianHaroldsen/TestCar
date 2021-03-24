@@ -9,9 +9,7 @@ int led_pin = 2;
 
 //initalize variables
 const int powerMax = 255;
-int powerRight = 0;
-int powerLeft = 0;
-int state = 0;
+int state = 2;
 //States are integers to make things easier and they correspond to the keypad/diagram
 //2 NoPower
 //5 HalfPower
@@ -91,12 +89,42 @@ void loop()
 
   void PerformState (int state)
   {
-    
+    switch (state)
+    {
+      case 2:
+      powerMotor(0, 0);
+      break;
+
+      case 4:
+      powerMotor(25, 50);
+      break;
+
+      case 5:
+      powerMotor(50, 50);
+      break;
+
+      case 6:
+      powerMotor(50, 25);
+      break;
+
+      case 7:
+      powerMotor(50, 100);
+      break;
+
+      case 8:
+      powerMotor(100, 100);
+      break;
+
+      case 9:
+      powerMotor(100, 50);
+      break;
+    }
   }
 
   void Down (int state)
   {
     switch (state)
+    {
       case 8:
       state = 5;
       break;
@@ -120,19 +148,101 @@ void loop()
       case 4:
       state = 2;
       break;
+    }
   }
 
   void Up (int state)
   {
+    switch (state)
+    {
+      case 2:
+      state = 5;
+      break;
 
+      case 5:
+      state = 8;
+      break;
+
+      case 6:
+      state = 9;
+      break;
+
+      case 4:
+      state = 7;
+      break;
+
+      case 8:
+      Horn();
+      break;
+    }
   }
 
   void Left (int state)
   {
+    switch (state)
+    {
+      case 8:
+      state = 7;
+      break;
 
+      case 9:
+      state = 8;
+      break;
+
+      case 5:
+      state = 4;
+      break;
+
+      case 6:
+      state = 5;
+      break;
+
+      case 2:
+      state = 4;
+      break;
+    }
   }
 
   void Right (int state)
   {
+    switch (state)
+    {
+      case 7:
+      state = 8;
+      break;
 
+      case 8:
+      state = 9;
+      break;
+
+      case 4:
+      state = 5;
+      break;
+
+      case 5:
+      state = 6;
+      break;
+
+      case 2:
+      state = 6;
+      break;
+    }
+  }
+
+//Blows a single tone horn
+  void Horn (void)
+  {
+
+  }
+
+//Takes in percentage of left and right motors and outputs to analog
+  void powerMotor(float left, float right)
+  {
+    //Multiply input (percentage) by powermax to get equivalent integer
+    int powerLeft = left * powerMax;
+    int powerRight = right * powerMax;
+
+    //write to motors
+    digitalWrite(motorLeft, powerLeft);
+    digitalWrite(motorRight, powerRight);
   }
