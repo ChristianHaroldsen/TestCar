@@ -25,10 +25,10 @@ const byte address[6] = "00001";
 
 //prototype functions
 void PerformState (int state);
-void Up (int state);
-void Down (int state);
-void Left (int state);
-void Right (int state);
+void Up (int s);
+void Down (int s);
+void Left (int s);
+void Right (int s);
 void Horn (void);
 void powerMotor(float left, float right);
 
@@ -59,22 +59,22 @@ void loop()
         switch (message)
         {
           case 555:
-          Down(state);
+          DownBut(state);
           digitalWrite(led_pin, LOW);
           break;
 
           case 444:
-          Left(state);
+          LeftBut(state);
           digitalWrite(led_pin, LOW);
           break;
 
           case 666:
-          Right(state);
+          RightBut(state);
           digitalWrite(led_pin, LOW);
           break;
 
           case 888:
-          Up(state);
+          UpBut(state);
           digitalWrite(led_pin, LOW);
           break;
 
@@ -130,9 +130,9 @@ void loop()
     }
   }
 
-  void Down (int state)
+  void DownBut (int s)
   {
-    switch (state)
+    switch (s)
     {
       case 8:
       state = 5;
@@ -160,9 +160,9 @@ void loop()
     }
   }
 
-  void Up (int state)
+  void UpBut (int s)
   {
-    switch (state)
+    switch (s)
     {
       case 2:
       state = 5;
@@ -186,9 +186,9 @@ void loop()
     }
   }
 
-  void Left (int state)
+  void LeftBut (int s)
   {
-    switch (state)
+    switch (s)
     {
       case 8:
       state = 7;
@@ -212,9 +212,9 @@ void loop()
     }
   }
 
-  void Right (int state)
+  void RightBut (int s)
   {
-    switch (state)
+    switch (s)
     {
       case 7:
       state = 8;
@@ -248,8 +248,8 @@ void loop()
   void powerMotor(float left, float right)
   {
     //Multiply input (percentage) by powermax to get equivalent integer
-    int powerLeft = left * powerMax;
-    int powerRight = right * powerMax;
+    int powerLeft = (left / 100) * powerMax;
+    int powerRight = (right / 100) * powerMax;
 
     //write to motors
     digitalWrite(motorLeft, powerLeft);

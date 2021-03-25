@@ -10,7 +10,7 @@ int fwd_pin = 4;
 int right_pin = 3;
 int left_pin = 5;
 int reset_pin = 2;
-int wait = 50; //ms for delay/debounce
+int wait = 500; //ms for delay/debounce
 
 void setup()
 {
