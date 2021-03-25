@@ -23,6 +23,15 @@ RF24 radio(9, 10); // CE, CSN
 
 const byte address[6] = "00001";
 
+//prototype functions
+void PerformState (int state);
+void Up (int state);
+void Down (int state);
+void Left (int state);
+void Right (int state);
+void Horn (void);
+void powerMotor(float left, float right);
+
 void setup()
   {
     //radio setup
