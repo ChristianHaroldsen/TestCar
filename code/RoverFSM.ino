@@ -105,7 +105,7 @@ void loop()
       break;
 
       case 4:
-      powerMotor(25, 50);
+      powerMotor(0, 50);
       break;
 
       case 5:
@@ -113,11 +113,11 @@ void loop()
       break;
 
       case 6:
-      powerMotor(50, 25);
+      powerMotor(50, 0);
       break;
 
       case 7:
-      powerMotor(50, 100);
+      powerMotor(10, 100);
       break;
 
       case 8:
@@ -125,7 +125,7 @@ void loop()
       break;
 
       case 9:
-      powerMotor(100, 50);
+      powerMotor(100, 10);
       break;
     }
   }
