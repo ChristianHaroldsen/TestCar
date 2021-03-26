@@ -8,7 +8,10 @@ int motorRight = 6; //Must be a PWM Pins:3, 5, 6, 9, 10, 11
 int led_pin = 2;
 
 //initalize variables
-const int powerMax = 255;
+int powerMax = 255;
+unsigned long nowTime = 0;
+unsigned long lastTime = 0;
+int stateDelay = 250; //ms for delay between state changes
 int state = 2;
 //States are integers to make things easier and they correspond to the keypad/diagram
 //2 NoPower
@@ -31,6 +34,7 @@ void Left (int s);
 void Right (int s);
 void Horn (void);
 void powerMotor(float left, float right);
+bool DelayCheck (void);
 
 void setup()
   {
@@ -59,23 +63,35 @@ void loop()
         switch (message)
         {
           case 555:
-          DownBut(state);
           digitalWrite(led_pin, LOW);
+          if (DelayCheck())
+            {
+              DownBut(state);
+            }
           break;
 
           case 444:
-          LeftBut(state);
           digitalWrite(led_pin, LOW);
+          if (DelayCheck())
+            {
+              LeftBut(state);
+            }
           break;
 
           case 666:
-          RightBut(state);
           digitalWrite(led_pin, LOW);
+          if (DelayCheck())
+            {
+              RightBut(state);
+            }
           break;
 
           case 888:
-          UpBut(state);
           digitalWrite(led_pin, LOW);
+          if (DelayCheck())
+            {
+              UpBut(state);
+            }
           break;
 
           case 456:
@@ -96,6 +112,41 @@ void loop()
     digitalWrite(led_pin, HIGH);
   }
 
+
+  //Blows a single tone horn
+    void Horn (void)
+    {
+
+    }
+
+  //Takes in percentage of left and right motors and outputs to analog
+    void powerMotor(float left, float right)
+    {
+      //Multiply input (percentage) by powermax to get equivalent integer
+      int powerLeft = (left / 100) * powerMax;
+      int powerRight = (right / 100) * powerMax;
+
+      //write to motors
+      analogWrite(motorLeft, powerLeft);
+      analogWrite(motorRight, powerRight);
+    }
+
+//returns true if is has been less than stateDelay ms between last state change.
+bool DelayCheck (void)
+{
+  nowTime = millis();
+  if (nowTime - lastTime >= stateDelay)
+    {
+      lastTime = nowTime;
+      return true;
+    }
+
+  else
+    {
+      return false;
+    }
+}
+
   void PerformState (int state)
   {
     switch (state)
@@ -105,19 +156,19 @@ void loop()
       break;
 
       case 4:
-      powerMotor(0, 50);
+      powerMotor(25, 75);
       break;
 
       case 5:
-      powerMotor(50, 50);
+      powerMotor(75, 75);
       break;
 
       case 6:
-      powerMotor(50, 0);
+      powerMotor(75, 25);
       break;
 
       case 7:
-      powerMotor(10, 100);
+      powerMotor(40, 100);
       break;
 
       case 8:
@@ -125,7 +176,7 @@ void loop()
       break;
 
       case 9:
-      powerMotor(100, 10);
+      powerMotor(100, 40);
       break;
     }
   }
@@ -173,15 +224,23 @@ void loop()
       break;
 
       case 6:
-      state = 9;
+      state = 5;
       break;
 
       case 4:
-      state = 7;
+      state = 5;
       break;
 
       case 8:
       Horn();
+      break;
+
+      case 9:
+      state = 8;
+      break;
+
+      case 7:
+      state = 8;
       break;
     }
   }
@@ -236,22 +295,4 @@ void loop()
       state = 6;
       break;
     }
-  }
-
-//Blows a single tone horn
-  void Horn (void)
-  {
-
-  }
-
-//Takes in percentage of left and right motors and outputs to analog
-  void powerMotor(float left, float right)
-  {
-    //Multiply input (percentage) by powermax to get equivalent integer
-    int powerLeft = (left / 100) * powerMax;
-    int powerRight = (right / 100) * powerMax;
-
-    //write to motors
-    analogWrite(motorLeft, powerLeft);
-    analogWrite(motorRight, powerRight);
   }

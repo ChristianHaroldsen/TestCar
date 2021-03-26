@@ -11,12 +11,6 @@ int right_pin = 3;
 int left_pin = 5;
 int reset_pin = 2;
 int wait = 50; //ms delay for debounce
-unsigned long nowTime = 0;
-unsigned long lastTime = 0;
-int pressTime = 250; //ms for delay between signals
-
-//Prototypes
-void LastPress (void);
 
 void setup()
 {
@@ -37,42 +31,24 @@ void loop()
 {
   //Pin reads LOW when pressed, numpad keys for directions-ish
   int message;
-  if (LastPress())
+  if (!digitalRead(reset_pin))
+    {
+    message = 555;
+    }
+  else if (!digitalRead(fwd_pin))
+    {
+     message = 888;
+    }
+  else if (!digitalRead(right_pin))
   {
-    if (!digitalRead(reset_pin))
-      {
-      message = 555;
-      }
-    else if (!digitalRead(fwd_pin))
-      {
-       message = 888;
-      }
-    else if (!digitalRead(right_pin))
-    {
-      message = 666;
-    }
-    else if (!digitalRead(left_pin))
-    {
-      message = 444;
-    }
+    message = 666;
+  }
+  else if (!digitalRead(left_pin))
+  {
+    message = 444;
   }
     //Always send when active, resets watchdog on receiver
   else message = 456;
   radio.write(&message, sizeof(message));  //Send the message to receiver
   delay(wait);
-}
-
-void LastPress (void)
-{
-  nowTime = millis();
-  if (nowTime - lastTime >= pressTime)
-  {
-    lastTime = nowTime;
-    return true;
-  }
-
-  else
-  {
-    return false;
-  }
 }
