@@ -252,6 +252,6 @@ void loop()
     int powerRight = (right / 100) * powerMax;
 
     //write to motors
-    digitalWrite(motorLeft, powerLeft);
-    digitalWrite(motorRight, powerRight);
+    analogWrite(motorLeft, powerLeft);
+    analogWrite(motorRight, powerRight);
   }

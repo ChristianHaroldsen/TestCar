@@ -1,0 +1,93 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATmega:ATmega328-PU U?
+U 1 1 605DCDC0
+P 5100 3100
+F 0 "U?" H 4456 3146 50  0000 R CNN
+F 1 "ATmega328-PU" H 4456 3055 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 5100 3100 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5100 3100 50  0001 C CNN
+	1    5100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L RF:nRF24L01P U?
+U 1 1 605DE18B
+P 9200 2250
+F 0 "U?" H 9200 3231 50  0000 C CNN
+F 1 "nRF24L01P" H 9200 3140 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm" H 9400 3050 50  0001 L CIN
+F 3 "http://www.nordicsemi.com/eng/content/download/2726/34069/file/nRF24L01P_Product_Specification_1_0.pdf" H 9200 2350 50  0001 C CNN
+	1    9200 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW?
+U 1 1 605DF125
+P 7000 4700
+F 0 "SW?" H 7000 4985 50  0000 C CNN
+F 1 "SW_Push" H 7000 4894 50  0000 C CNN
+F 2 "" H 7000 4900 50  0001 C CNN
+F 3 "~" H 7000 4900 50  0001 C CNN
+	1    7000 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW?
+U 1 1 605DFB91
+P 7600 4700
+F 0 "SW?" H 7600 4985 50  0000 C CNN
+F 1 "SW_Push" H 7600 4894 50  0000 C CNN
+F 2 "" H 7600 4900 50  0001 C CNN
+F 3 "~" H 7600 4900 50  0001 C CNN
+	1    7600 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW?
+U 1 1 605E0BD2
+P 8200 4700
+F 0 "SW?" H 8200 4985 50  0000 C CNN
+F 1 "SW_Push" H 8200 4894 50  0000 C CNN
+F 2 "" H 8200 4900 50  0001 C CNN
+F 3 "~" H 8200 4900 50  0001 C CNN
+	1    8200 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW?
+U 1 1 605E1552
+P 7550 5050
+F 0 "SW?" H 7550 5335 50  0000 C CNN
+F 1 "SW_Push" H 7550 5244 50  0000 C CNN
+F 2 "" H 7550 5250 50  0001 C CNN
+F 3 "~" H 7550 5250 50  0001 C CNN
+	1    7550 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Battery_Cell BT?
+U 1 1 605E2896
+P 1900 800
+F 0 "BT?" H 2018 896 50  0000 L CNN
+F 1 "Battery_Cell" H 2018 805 50  0000 L CNN
+F 2 "" V 1900 860 50  0001 C CNN
+F 3 "~" V 1900 860 50  0001 C CNN
+	1    1900 800 
+	0    1    1    0   
+$EndComp
+$EndSCHEMATC
