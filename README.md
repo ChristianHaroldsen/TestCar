@@ -13,8 +13,8 @@ The purpopse of this test car is to gain expeirence building a project from begi
   - [x]  Transmitter tethered
 - [x]  Stage 4
   - [x]  Untethered transmitter
-- [ ]  Stage 5
-  - [ ]  Improved control system (state machine)
+- [x]  Stage 5
+  - [x]  Improved control system (state machine)
 - [ ]  Stage 6
   - [ ]  Horn - Single tone
   - [ ]  Horn - Dixieland
